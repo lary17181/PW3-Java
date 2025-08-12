@@ -1,6 +1,7 @@
 package br.com.etechas.tarefas.controller;
 
 
+import br.com.etechas.tarefas.dto.TarefaResponseDTO;
 import br.com.etechas.tarefas.entity.Tarefa;
 import br.com.etechas.tarefas.repository.TarefaRepository;
 import br.com.etechas.tarefas.service.TarefaService;
@@ -19,7 +20,7 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @GetMapping
-    public List<Tarefa> tarefaList(){
-        return tarefaService.tarefaList();
+    public List<TarefaResponseDTO> tarefaList(){
+        return (tarefaService.tarefaList());
     }
 }
