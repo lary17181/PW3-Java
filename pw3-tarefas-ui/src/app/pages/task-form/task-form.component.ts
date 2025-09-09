@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
 import { Task } from '../../model/task';
 import { HttpClient } from '@angular/common/http';
 import { TaskService } from '../../service/task.service';
@@ -27,7 +27,7 @@ export class TaskFormComponent {
     titulo: ['', Validators.required],
     descricao: [''],
     responsavel: ['', Validators.required],
-    dataLimite: ['', Validators.required],
+    dataLimite: ['', Validators.required, ],
     status: ['PENDING', Validators.required],
   });
 
@@ -38,10 +38,13 @@ export class TaskFormComponent {
 
    this.taskService.createTask(task).subscribe({
       next: () => {
-        console.log('Tarefa criada com sucesso');
+        alert('Tarefa criada com sucesso');
         this.router.navigate(['/tasks']);
       },
       error: (err) => console.error('Erro ao salvar tarefa:', err),
     });
   }
-}
+
+    
+      
+    }

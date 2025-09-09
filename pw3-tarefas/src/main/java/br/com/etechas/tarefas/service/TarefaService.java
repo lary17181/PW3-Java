@@ -31,7 +31,7 @@ public class TarefaService {
         tarefa.setDescricao(dto.getDescricao());
         tarefa.setResponsavel(dto.getResponsavel());
         tarefa.setDataLimite(dto.getDataLimite());
-        tarefa.setStatus(dto.getStatus());
+        tarefa.setStatus(StatusEnum.PENDING);
 
         Tarefa saved = repository.save(tarefa);
         return tarefaMapper.toResponseDTOList(Collections.singletonList(saved)).get(0);
