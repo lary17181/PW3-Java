@@ -1,6 +1,7 @@
 package br.com.etechas.tarefas.controller;
 
 import br.com.etechas.tarefas.dto.TarefaResponseDTO;
+import br.com.etechas.tarefas.dto.TarefaRequestDTO;
 import br.com.etechas.tarefas.entity.Tarefa;
 import br.com.etechas.tarefas.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class TarefaController {
         return service.findAll();
     }
 
+    @PostMapping
+    public ResponseEntity<TarefaResponseDTO> publicar(@RequestBody TarefaRequestDTO dto){
+        TarefaResponseDTO saved = service.save(dto);
+        return ResponseEntity.ok(saved);
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         if(service.deleteById(id)){

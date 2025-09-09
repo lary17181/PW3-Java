@@ -7,7 +7,9 @@ import br.com.etechas.tarefas.mapper.TarefaMapper;
 import br.com.etechas.tarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import br.com.etechas.tarefas.dto.TarefaRequestDTO;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,6 +25,17 @@ public class TarefaService {
         return tarefaMapper.toResponseDTOList(repository.findAll());
     }
 
+    public TarefaResponseDTO save(TarefaRequestDTO dto){
+        Tarefa tarefa = new Tarefa();
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setResponsavel(dto.getResponsavel());
+        tarefa.setDataLimite(dto.getDataLimite());
+        tarefa.setStatus(dto.getStatus());
+
+        Tarefa saved = repository.save(tarefa);
+        return tarefaMapper.toResponseDTOList(Collections.singletonList(saved)).get(0);
+    }
 
     public boolean deleteById(Long id){
         var tarefa = repository.findById(id);

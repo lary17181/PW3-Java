@@ -12,4 +12,5 @@ public interface TarefaMapper {
     TarefaMapper INSTANCE = Mappers.getMapper(TarefaMapper.class);
 
     List<TarefaResponseDTO> toResponseDTOList(List<Tarefa> tarefa);
+
 }
