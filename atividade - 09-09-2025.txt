@@ -1,0 +1,22 @@
+PREENCHER O WEBSAI
+websai.cps.sp.gov.br
+
+------------------------------------
+
+Backend:
+Criar um endpoint POST /tarefas que permita cadastrar uma nova 
+tarefa no sistema. Cada tarefa deverá conter as seguintes informações 
+titulo, descrição, responsável e dataLimite (novo DTO). 
+
+Ao cadastrar uma tarefa, o status inserido será PENDING automaticamente 
+e não será permitida que a dataLimite seja anterior à data atual (hoje). 
+Caso essa regra seja violada, a API lançará uma Exception, acompanhado 
+de uma mensagem adequada.
+
+------------------------------------
+
+Frontend:
+Realizar a integração da aplicação em Angular com o novo endpoint 
+POST /tarefas criado acima
+
+
