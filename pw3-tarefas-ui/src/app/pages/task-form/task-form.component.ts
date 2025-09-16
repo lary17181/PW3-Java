@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Task } from '../../model/task';
 import { HttpClient } from '@angular/common/http';
 import { TaskService } from '../../service/task.service';
@@ -41,10 +41,10 @@ export class TaskFormComponent {
         alert('Tarefa criada com sucesso');
         this.router.navigate(['/tasks']);
       },
-      error: (err) => console.error('Erro ao salvar tarefa:', err),
+      error: (err) => alert('Erro ao salvar tarefa'),
     });
   }
 
-    
-      
+
+
     }
