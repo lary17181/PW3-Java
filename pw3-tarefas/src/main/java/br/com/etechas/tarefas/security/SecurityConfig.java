@@ -17,7 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.cors(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());//permitAll() libera sem autenticação
+        http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());// libera sem autenticação authenticated()
         http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
