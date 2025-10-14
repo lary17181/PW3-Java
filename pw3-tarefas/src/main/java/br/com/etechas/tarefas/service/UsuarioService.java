@@ -9,7 +9,9 @@ import br.com.etechas.tarefas.mapper.TarefaMapper;
 import br.com.etechas.tarefas.mapper.UsuarioMapper;
 import br.com.etechas.tarefas.repository.TarefaRepository;
 import br.com.etechas.tarefas.repository.UsuarioRepository;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,7 +24,8 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioMapper mapper;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UsuarioResponseDTO registrar(UsuarioCadastroDTO dto){
 
@@ -31,8 +34,10 @@ public class UsuarioService {
         if (usuarioOptional.isPresent()){
             throw new RuntimeException("esse nome ja existe");
         }else{
+            var senhaCifrada = passwordEncoder.encode(dto.password());
             Usuario saved = mapper.toEntity(dto);
             repository.save(saved);
+
 
             return mapper.toUsuarioResponseDTO(saved);
         }
