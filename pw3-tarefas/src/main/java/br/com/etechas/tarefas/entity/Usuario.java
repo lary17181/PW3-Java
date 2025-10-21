@@ -2,6 +2,7 @@ package br.com.etechas.tarefas.entity;
 
 import br.com.etechas.tarefas.enums.RoleEnum;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

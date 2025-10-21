@@ -11,6 +11,9 @@ import br.com.etechas.tarefas.repository.TarefaRepository;
 import br.com.etechas.tarefas.repository.UsuarioRepository;
 import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
     @Autowired
     private UsuarioRepository repository;
 
@@ -41,5 +44,11 @@ public class UsuarioService {
 
             return mapper.toUsuarioResponseDTO(saved);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("username" + username + "Usuário não encontrado!"));
     }
 }
