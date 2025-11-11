@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +23,15 @@ public class LoginController {
     @Autowired
     private JWTHolder jwtHolder;
 
-    public ResponseEntity<LoginResponseDTO> autenticar(
-            @RequestBody LoginRequestDTO loginRequest) {
-        var autenticado = authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(loginRequest.usuario(), loginRequest.senha())));
-
-        final String token = jwtHolder.generateToken((UserDetails) autenticado.getPrincipal());
-        return null;
+    @PostMapping
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO
+    loginRequest) {
+        var autenticado = authenticationManager.authenticate(new
+                UsernamePasswordAuthenticationToken(loginRequest.username(),
+                loginRequest.password()));
+        String token = jwtHolder.generateToken((UserDetails)
+                autenticado.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 }
 
